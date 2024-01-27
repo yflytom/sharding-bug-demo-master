@@ -30,7 +30,7 @@ public class YearMonthShardingAlgorithm implements StandardShardingAlgorithm<Dat
     public String doSharding(Collection collection, PreciseShardingValue preciseShardingValue) {
         //获取字段值
 
-        return "";
+        return "books_202401";
     }
 
     /**

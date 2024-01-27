@@ -15,15 +15,15 @@ rules:
   # 加载指定单表对应数据源
   - !SINGLE
     tables:
-      - ds_0.dept
+      - CS01.dept
   - !SHARDING
     # 数据分片规则配置
     tables:
       books:
-        actualDataNodes: ds_0.books_2024$->{(1..2).collect(i->i.toString().padLeft(2,'0'))}
+        actualDataNodes: ds_0.books_2024$->{(1..2).collect(i->i.toString().padLeft(2,'0'))},ds_1.books_2024$->{(1..2).collect(i->i.toString().padLeft(2,'0'))}
         tableStrategy:
           standard:
-            shardingColumn: price
+            shardingColumn: id
             shardingAlgorithmName: book-alg
       user:
         actualDataNodes: ds_0.user,ds_1.user
@@ -43,9 +43,6 @@ rules:
         props:
           strategy: hint
           algorithmClassName: com.example.shardingbugdemo.config.DefaultDataBaseAlgorithm
-    defaultTableStrategy:
-      hint:
-        shardingAlgorithmName: default-alg
     defaultDatabaseStrategy:
       hint:
         shardingAlgorithmName: default-alg

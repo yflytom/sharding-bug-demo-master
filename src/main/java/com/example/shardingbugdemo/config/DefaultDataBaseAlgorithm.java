@@ -12,13 +12,15 @@ import java.util.Properties;
  */
 public class DefaultDataBaseAlgorithm implements HintShardingAlgorithm<String> {
 
+    /**
+     *
+     *
+     * @param collection 库或者表集合
+     * @param hintShardingValue 路由key
+     * @return
+     */
     @Override
     public Collection<String> doSharding(Collection<String> collection, HintShardingValue<String> hintShardingValue) {
-        Collection<String> hintShardingValues = hintShardingValue.getValues();
-        Collection<String> result = new ArrayList<>();
-        for (String key : hintShardingValues) {
-            result.add(hintShardingValue.getLogicTableName() + "_" + key);
-        }
-        return result;
+        return hintShardingValue.getValues();
     }
 }
