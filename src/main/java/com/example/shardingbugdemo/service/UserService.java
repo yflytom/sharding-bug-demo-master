@@ -20,17 +20,7 @@ public class UserService extends BaseService<UserMapper, User> {
 
     @Transactional(rollbackFor = Exception.class)
     public void testTran() {
-        User user = new User();
-        user.setUsername("tom1");
-        this.save(user);
-
-
-        List<User> list = this.lambdaQuery().list();
-        list.forEach(item -> {
-            item.setUsername("tomm2");
-            this.updateById(item);
-        });
-        throw new NullPointerException("测试事务回滚");
+       baseMapper.testSel();
     }
     @Transactional(rollbackFor = Exception.class)
     public void tran2() {

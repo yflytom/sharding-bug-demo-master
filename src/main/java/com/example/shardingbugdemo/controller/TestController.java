@@ -1,10 +1,12 @@
 package com.example.shardingbugdemo.controller;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.example.shardingbugdemo.entity.Books;
 import com.example.shardingbugdemo.entity.User;
 import com.example.shardingbugdemo.service.BooksService;
 import com.example.shardingbugdemo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shardingsphere.driver.jdbc.core.datasource.ShardingSphereDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +50,8 @@ public class TestController {
     @GetMapping(value = "/book")
     public List<Books> booksList() {
         List<Books> list = booksService.lambdaQuery().list();
+        ShardingSphereDataSource shardingSphereDataSource = SpringUtil.getBean("shardingSphereDataSource");
+
         return list;
     }
 }
